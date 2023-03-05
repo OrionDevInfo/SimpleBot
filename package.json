@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "on": "node ."
+    "on": "node .",
+    "dev": "pm2 start main.js"
   },
   "keywords": [],
   "author": "OrionDevInfo",
