@@ -13,7 +13,7 @@ module.exports = {
         }
 
         try {
-            await command.execute(interaction);
+            await command.execute(interaction, client);
         } catch (error) {
             console.log('\x1b[31m%s\x1b[0m', `Error executing ${interaction.commandName} for ${client.user.tag}.`);
             console.error(error);
