@@ -18,3 +18,8 @@
 Network Trash Folder
 Temporary Items
 .apdisk
+
+img
+node_modules
+package-lock.json
+.eslintrc.json
