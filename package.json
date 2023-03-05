@@ -1,0 +1,19 @@
+{
+  "name": "simplebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "on": "node ."
+  },
+  "keywords": [],
+  "author": "OrionDevInfo",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0"
+  }
+}
