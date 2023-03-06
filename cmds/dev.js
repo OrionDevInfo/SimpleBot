@@ -1,9 +1,9 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, ActivityType } = require('discord.js');
 require('dotenv').config();
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('bot')
+        .setName('dev')
         .setDescription('Developer access.')
         .setDescriptionLocalization('fr', 'Accès developpeur.')
         .addSubcommand(subcommand =>
@@ -39,10 +39,10 @@ module.exports = {
                         .setDescriptionLocalization('fr', 'Type d\'activité du bot.')
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Competing', value: 'competing' },
-                            { name: 'Listening', value: 'listening' },
-                            { name: 'Playing', value: 'playing' },
-                            { name: 'Watching', value: 'watching' },
+                            { name: 'Competing', value: 'c' },
+                            { name: 'Listening', value: 'l' },
+                            { name: 'Playing', value: 'p' },
+                            { name: 'Watching', value: 'w' },
                         ))
                 .addStringOption(option =>
                     option
@@ -70,7 +70,14 @@ module.exports = {
             const status = interaction.options.getString('status');
             const activityname = interaction.options.getString('activityname');
             const activitytype = interaction.options.getString('activitytype');
-            await client.user.setPresence({ activities: [{ name: activityname, type: activitytype }], status: status });
+            // eslint-disable-next-line no-inner-declarations
+            function aType () {
+                if (activitytype == 'c') return ActivityType.Competing;
+                else if (activitytype == 'l') return ActivityType.Listening;
+                else if (activitytype == 'p') return ActivityType.Playing;
+                return ActivityType.Watching;
+            }
+            await client.user.setPresence({ activities: [{ name: activityname ? activityname : 'over the server …', type: activitytype ? aType() : ActivityType.Watching }], status: status ? status : 'online' });
             await interaction.reply({ content: 'Updated the presence. This change may take a while to apply.', ephemeral: true });
         }
         else if (interaction.options.getSubcommand() == 'profilepicture') {
